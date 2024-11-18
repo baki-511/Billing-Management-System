@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div th:fragment="dashboard">
+        <h2 class="dash-title">Overview</h2>
+        <div class="dash-cards">
+            <div class="card-single">
+                <div class="card--body">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <div>
+                        <h5>Account Balance</h5>
+                        <h4>$30,200</h4>
+                    </div>
+                </div>
+                <div class="card--footer">
+                    <a href="">View All</a>
+                </div>
+            </div>
+            <div class="card-single">
+                <div class="card--body">
+                    <i class="fa-solid fa-rotate"></i>
+                    <div>
+                        <h5>Pending</h5>
+                        <h4>$1,200</h4>
+                    </div>
+                </div>
+                <div class="card--footer">
+                    <a href="">View All</a>
+                </div>
+            </div>
+            <div class="card-single">
+                <div class="card--body">
+                    <i class="fa-solid fa-square-check"></i>
+                    <div>
+                        <h5>Processed</h5>
+                        <h4>$15,500</h4>
+                    </div>
+                </div>
+                <div class="card--footer">
+                    <a href="">View All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
