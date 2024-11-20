@@ -1,8 +1,12 @@
 package com.billing.stystem.service.impl;
 
+import com.billing.stystem.dto.ProductDto;
+import com.billing.stystem.entity.Category;
 import com.billing.stystem.entity.Product;
 import com.billing.stystem.exception.ProductNotFoundException;
+import com.billing.stystem.repository.CategoryRepository;
 import com.billing.stystem.repository.ProductRepository;
+import com.billing.stystem.service.CategoryService;
 import com.billing.stystem.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +21,18 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
     
+    @Autowired
+    private CategoryService categoryService;
+    
     @Override
-    public Product addProduct(Product product, MultipartFile file) {
+    public Product addProduct(ProductDto productDto, MultipartFile file) {
+        Product product = new Product();
+        product.setProdName(productDto.getProdName());
+        product.setPrice(productDto.getPrice());
+        product.setStock(productDto.getStock());
+        product.setDescription(productDto.getDescription());
+        Category categoryById = categoryService.getCategoryById(productDto.getCategoryId());
+        product.setCategory(categoryById);
         String image = "";
         try {
             image = Base64.getEncoder().encodeToString(file.getBytes());

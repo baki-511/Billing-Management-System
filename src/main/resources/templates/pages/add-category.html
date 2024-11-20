@@ -21,9 +21,9 @@
     <main>
         <div class="container">
             <div class="card mt-3 col-md-8 offset-md-2  p-2">
-                <h1 class="text-center">Add Project</h1>
+                <h1 class="text-center">Add Category</h1>
                 <div class="card-body">
-                    <form th:action="@{/admin/category/add}" method="post" enctype="multipart/form-data">
+                    <form th:action="@{/category/add}" method="post" enctype="multipart/form-data">
                         <div class="form-group mb-3">
                             <label for="categoryName">Category Name</label>
                             <input type="text" class="form-control" id="categoryName" name="categoryName" required>
