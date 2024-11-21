@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li>
-                <a  th:href="@{/create-product}">
+                <a th:href="@{/create-product}">
                     <div style="width: 1.1rem;">
                         <i class="fa-regular fa-face-smile"></i>
                     </div>
@@ -35,11 +35,19 @@
                 </a>
             </li>
             <li>
-                <a  th:href="@{/create-category}">
+                <a th:href="@{/create-category}">
                     <div style="width: 1.1rem;">
                         <i class="fa-solid fa-calendar"></i>
                     </div>
                     <span>Add Category</span>
+                </a>
+            </li>
+            <li>
+                <a th:href="@{/add-client}">
+                    <div style="width: 1.1rem;">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                    <span>Add Client</span>
                 </a>
             </li>
             <li>
@@ -58,14 +66,14 @@
                     <span>All Category</span>
                 </a>
             </li>
-            <!-- <li>
-                      <a href="">
-                          <div style="width: 1.1rem;">
-                          <i class="fa-regular fa-clock"></i>
-                          </div>
-                          <span>Timesheet</span>
-                      </a>
-                  </li> -->
+            <li>
+                <a th:href="@{/client/all}">
+                    <div style="width: 1.1rem;">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <span>All Client</span>
+                </a>
+            </li>
             <li>
                 <a href="">
                     <div style="width: 1.1rem;">
