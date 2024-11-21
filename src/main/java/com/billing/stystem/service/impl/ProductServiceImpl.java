@@ -4,7 +4,6 @@ import com.billing.stystem.dto.ProductDto;
 import com.billing.stystem.entity.Category;
 import com.billing.stystem.entity.Product;
 import com.billing.stystem.exception.ProductNotFoundException;
-import com.billing.stystem.repository.CategoryRepository;
 import com.billing.stystem.repository.ProductRepository;
 import com.billing.stystem.service.CategoryService;
 import com.billing.stystem.service.ProductService;
@@ -62,11 +61,17 @@ public class ProductServiceImpl implements ProductService {
     }
     
     @Override
-    public Product updateProduct(Product product, MultipartFile file) {
-        Product productById = getProductById(product.getProductId());
+    public Product updateProduct(ProductDto productDto, MultipartFile file) {
+        Product product = getProductById(productDto.getProductId());
+        product.setProdName(productDto.getProdName());
+        product.setPrice(productDto.getPrice());
+        product.setStock(productDto.getStock());
+        product.setDescription(productDto.getDescription());
+        Category categoryById = categoryService.getCategoryById(productDto.getCategoryId());
+        product.setCategory(categoryById);
         String image = "";
         if (file.isEmpty()) {
-            product.setImage(productById.getImage());
+            product.setImage(product.getImage());
         } else {
             try {
                 image = Base64.getEncoder().encodeToString(file.getBytes());

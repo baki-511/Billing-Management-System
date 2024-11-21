@@ -15,7 +15,7 @@ public interface ProductService {
     
     public String deleteProduct(Integer prodId);
     
-    public Product updateProduct(Product product, MultipartFile file);
+    public Product updateProduct(ProductDto productDto, MultipartFile file);
     
     public Product updateStocks(Integer productId, Integer qty);
 }

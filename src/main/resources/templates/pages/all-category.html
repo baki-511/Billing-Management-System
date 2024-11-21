@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Construction Site</title>
+    <!--    Common Css-->
+    <div th:replace="~{common :: common(~{::link})}"></div>
+</head>
+<body>
+<input type="checkbox" id="sidebar-toggle">
+<!--Sidebar -->
+<div th:replace="~{components/sidebar :: sidebar}"></div>
+
+
+<!--Main Content -->
+<div class="main-content">
+    <header th:replace="~{components/header :: header}"></header>
+    <main>
+        <div class="container">
+            <h2 class="text-center py-3 bg-light">All Products</h2>
+            <div class="card" >
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr class="py-3 fs-5 bg-success text-light">
+                            <th scope="col">ID</th>
+                            <th scope="col" class="text-nowrap">Product Name</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="category : ${categories}" class="py-3">
+                            <td class="text-nowrap px-2" th:text="${category.categoryId}"></td>
+                            <td class="text-nowrap px-2" th:text="${category.categoryName}"></td>
+                            <td class="text-nowrap px-2">
+                                <a th:href="@{'/category/edit/'+ ${category.categoryId}}" class="btn btn-warning"><i class="fa-regular fa-pen-to-square fa-xs"></i></a>
+                                <a th:href="@{'/category/delete/'+ ${category.categoryId}}" class="btn btn-danger"><i class="fa-regular fa-trash-can fa-xs"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+<!--Common Js-->
+<div th:replace="~{common :: common_js(~{::script})}"></div>
+</body>
+</html>
