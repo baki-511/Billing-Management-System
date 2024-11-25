@@ -19,8 +19,12 @@ public class HomeController {
     @Autowired
     private CategoryService categoryService;
     
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
     
-    @GetMapping("/")
+    @GetMapping({"/", "/home"})
     public String home() {
         return "index";
     }
