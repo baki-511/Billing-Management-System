@@ -215,3 +215,8 @@ main {
 .card--footer a {
     color: var(--main-color);
 }
+
+.my-tbody tr{
+  cursor: pointer;
+}
+

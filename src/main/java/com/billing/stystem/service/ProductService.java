@@ -18,4 +18,9 @@ public interface ProductService {
     public Product updateProduct(ProductDto productDto, MultipartFile file);
     
     public Product updateStocks(Integer productId, Integer qty);
+    
+//    public ProductDto addProduct(ProductDto product);
+    
+    public List<ProductDto> allProducts();
+    public ProductDto findProductById(Integer id);
 }

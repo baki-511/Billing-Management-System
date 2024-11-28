@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -88,6 +89,34 @@ public class ProductServiceImpl implements ProductService {
         Product product = getProductById(productId);
         product.setStock(product.getStock() - qty);
         return productRepository.save(product);
+    }
+    
+    @Override
+    public List<ProductDto> allProducts(){
+        List<Product> all = productRepository.findAll();
+        List<ProductDto> result = new ArrayList<>();
+        for (Product p : all) {
+            ProductDto dto = new ProductDto();
+            dto.setProductId(p.getProductId());
+            dto.setProdName(p.getProdName());
+            dto.setPrice(p.getPrice());
+            dto.setStock(p.getStock());
+            dto.setDescription(p.getDescription());
+            result.add(dto);
+        }
+        return result;
+    }
+    
+    @Override
+    public ProductDto findProductById(Integer id) {
+        Product p = getProductById(id);
+        ProductDto dto = new ProductDto();
+        dto.setProductId(p.getProductId());
+        dto.setProdName(p.getProdName());
+        dto.setPrice(p.getPrice());
+        dto.setStock(p.getStock());
+        dto.setDescription(p.getDescription());
+        return dto;
     }
     
 }

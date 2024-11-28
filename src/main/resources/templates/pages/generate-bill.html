@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Construction Site</title>
+    <!--    Common Css-->
+    <div th:replace="~{common :: common(~{::link})}"></div>
+</head>
+<body>
+<input type="checkbox" id="sidebar-toggle">
+<!--Sidebar -->
+<div th:replace="~{components/sidebar :: sidebar}"></div>
+
+
+<!--Main Content -->
+<div class="main-content">
+    <header th:replace="~{components/header :: header}"></header>
+    <main>
+        <div class="container-fluid">
+           <div class="card">
+               <div class="card-body">
+                   <div class="d-flex flex-column">
+                       <div class="search-client col-md-6 offset-md-3 d-flex align-items-center justify-content-around">
+                           <div class="client-input">
+                               <input type="text" class="form-control" placeholder="Search Client"/>
+                           </div>
+                           <div>
+                               <button class="btn btn-primary">
+                                   <i class="fa-solid fa-circle-plus fs-5"></i> <span class="ms-2">Add New Client</span>
+                               </button>
+                           </div>
+                       </div>
+                       <div class="search-client-result col-md-6 offset-md-3 mt-1 p-2 .d-none">
+                           <div class="card">
+                               <table class="table">
+                                   <thead>
+                                   <tr>
+                                       <th scope="col">#</th>
+                                       <th scope="col">First</th>
+                                       <th scope="col">Last</th>
+                                       <th scope="col">Handle</th>
+                                   </tr>
+                                   </thead>
+                                   <tbody>
+                                   <tr>
+                                       <th scope="row">1</th>
+                                       <td>Mark</td>
+                                       <td>Otto</td>
+                                       <td>@mdo</td>
+                                   </tr>
+                                   <tr>
+                                       <th scope="row">2</th>
+                                       <td>Jacob</td>
+                                       <td>Thornton</td>
+                                       <td>@fat</td>
+                                   </tr>
+                                   <tr>
+                                       <th scope="row">3</th>
+                                       <td colspan="2">Larry the Bird</td>
+                                       <td>@twitter</td>
+                                   </tr>
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="client-result m-2">
+                   <div class="card px-2">
+                       <table class="table">
+                           <thead>
+                           <tr>
+                               <th scope="col">#</th>
+                               <th scope="col">First</th>
+                               <th scope="col">Last</th>
+                               <th scope="col">Handle</th>
+                           </tr>
+                           </thead>
+                           <tbody>
+                           <tr>
+                               <th scope="row">1</th>
+                               <td>Mark</td>
+                               <td>Otto</td>
+                               <td>@mdo</td>
+                           </tr>
+                           <tr>
+                               <th scope="row">2</th>
+                               <td>Jacob</td>
+                               <td>Thornton</td>
+                               <td>@fat</td>
+                           </tr>
+                           <tr>
+                               <th scope="row">3</th>
+                               <td colspan="2">Larry the Bird</td>
+                               <td>@twitter</td>
+                           </tr>
+                           </tbody>
+                       </table>
+                   </div>
+               </div>
+           </div>
+        </div>
+
+
+<!--        Products Selection-->
+        <div class="container-fluid mt-2">
+           <div class="card">
+               <div>
+                   <div class="text-center pb-2 pt-3 card-title"><h4 class="text-success">Add Product</h4></div>
+<!--                   <div class="col-md-6 offset-md-3 my-2" id="prodInp">-->
+<!--                       <input type="text" class="form-control" placeholder="Search Product"/>-->
+<!--                   </div>-->
+                   <div class="card-body ">
+                       <div class="input" id="prodInp">
+                           <input type="text" class="form-control mt-3" placeholder="Search" />
+                       </div>
+                       <div class="prod-table">
+                           <table class="table mt-4">
+                               <!-- <thead>
+                                 <tr>
+                                   <th scope="col">Idx</th>
+                                   <th scope="col">Product Name</th>
+                                   <th scope="col">Price</th>
+                                   <th scope="col">Stock</th>
+                                   <th scope="col">Description</th>
+                                 </tr>
+                               </thead> -->
+                               <tbody class="my-tbody" id="my-tbody"></tbody>
+                           </table>
+                       </div>
+                   </div>
+<!--                   <div class="col-md-6 offset-md-3">-->
+<!--                       <div class="card">-->
+<!--                           <table class="table">-->
+<!--                               <thead>-->
+<!--                               <tr>-->
+<!--                                   <th scope="col">#</th>-->
+<!--                                   <th scope="col">First</th>-->
+<!--                                   <th scope="col">Last</th>-->
+<!--                                   <th scope="col">Handle</th>-->
+<!--                               </tr>-->
+<!--                               </thead>-->
+<!--                               <tbody class="my-tbody"></tbody>-->
+<!--                           </table>-->
+<!--                       </div>-->
+<!--                   </div>-->
+               </div>
+
+               <div>
+                   <div class="mt-5 mx-4">
+                       <table class="table">
+                           <thead>
+                           <tr class="bg-info text-white">
+                               <th scope="col">Idx</th>
+                               <th scope="col">Prod ID</th>
+                               <th scope="col">Product Name</th>
+                               <th scope="col">Price</th>
+                               <th scope="col">Qty</th>
+                               <th scope="col">Subtotal</th>
+                               <th scope="col">Action</th>
+                           </tr>
+                           </thead>
+                           <tbody class="select-tbody">
+                           </tbody>
+                       </table>
+                   </div>
+               </div>
+           </div>
+
+        </div>
+    </main>
+</div>
+
+
+<!--Common Js-->
+<div th:replace="~{common :: common_js(~{::script})}"></div>
+
+<script type="module" th:src=@{/js/bill.js}></script>
+<script type="module" th:src=@{/js/search-bill.js}></script>
+<!--<script type="module" src="/main.js"></script>-->
+<!--<script type="module" src="/search-bill.js"></script>-->
+</body>
+</html>
