@@ -67,11 +67,6 @@ const renderedSelectedList = (client) => {
   removeItem(removeBtn);
   tbody.appendChild(tr);
 
-  // try {
-  //   clients.forEach((client, idx) => {
-
-  //   });
-  // } catch (error) {}
 };
 
 const removeItem = (removeBtn) => {
@@ -114,12 +109,6 @@ export const getClient = async (mob) => {
 // document.addEventListener("DOMContentLoaded", init);
 
 //===================================== Search Client Section ========================================
-//import {
-//  fetchProducts,
-//  renderProducts,
-//  addProduct,
-//  getProduct,
-//} from "/js/bill.js";
 
 const searchBar = document.getElementById("client-inp");
 const prodTable = document.querySelector(".client-table");
@@ -143,21 +132,6 @@ searchBar.addEventListener("input", async (e) => {
   }
 });
 
-// const addToList = (products) => {
-//   const allTBody = document.querySelectorAll(".client-tbody tr");
-//   console.log(allTBody);
-//   allTBody.forEach((r) => {
-//     r.addEventListener("click", (e) => {
-//       // console.log("tr : " + r);
-
-//       const firstTd = r.querySelector("td");
-//       console.log(firstTd);
-
-//       // getProduct(firstTd).then((prod) => addProduct(prod));
-//     });
-//   });
-// };
-
 const addToList = (products) => {
   const allTBody = document.querySelectorAll(".client-tbody tr");
   // console.log(allTBody);
@@ -167,13 +141,6 @@ const addToList = (products) => {
       const clientMobCell = r.querySelector(".client-mob").innerHTML;
       getClient(clientMobCell).then((prod) => addProduct(prod));
 
-      // if (clientMobCell) {
-      //   // Get the inner text or inner HTML
-      //   const clientMobText = clientMobCell.textContent || clientMobCell.innerHTML;
-      //   console.log(clientMobText);
-      // } else {
-      //   console.error("Element with class 'client-mob' not found in this row.");
-      // }
     });
   });
 };

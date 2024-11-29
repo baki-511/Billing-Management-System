@@ -10,8 +10,7 @@ export const fetchProducts = async () => {
 
 export const renderProducts = (products) => {
   // const tBody = document.querySelector("tbody");
-  const tBody = document.getElementById("my-tbody")
-  console.log(tBody)
+  const tBody = document.getElementById("my-tbody");
   tBody.innerHTML = "";
   try {
     products.forEach((product, idx) => {
@@ -21,9 +20,7 @@ export const renderProducts = (products) => {
       tr.innerHTML = `
       <td class="text-nowrap px-2">${product.productId}</td>
       <td class="text-nowrap px-2">${product.prodName}</td>
-      <td class="text-nowrap px-2">$${product.price.toFixed(
-        2
-      )}</td>
+      <td class="text-nowrap px-2">$${product.price.toFixed(2)}</td>
       
 
     `;
@@ -55,6 +52,8 @@ export const addProduct = (prod) => {
 };
 
 const renderedSelectedList = (products) => {
+  // console.log(products);
+
   const tbody = document.querySelector(".select-tbody");
   const currentQuantities = {};
   tbody.querySelectorAll("tr").forEach((row) => {
@@ -94,15 +93,48 @@ const renderedSelectedList = (products) => {
       const quantityInput = tr.querySelector(".quantity");
       const totalCell = tr.querySelector(".subtotal");
 
+      const updateSubtotal = () => {
+        // Select all subtotal cells
+        const subtotalCells = document.querySelectorAll(".subtotal");
+
+        // Calculate the total sum
+        let totalSum = 0;
+        subtotalCells.forEach((cell) => {
+          totalSum += parseFloat(cell.textContent) || 0;
+        });
+
+        let tax = totalSum * 0.18;
+        let final = totalSum + tax;
+        // Update the total price in the UI
+        const totalElement = document.getElementById("sub-total"); // Assuming there's an element for the total
+        const totalTax = document.getElementById("tax");
+        const finalTotal = document.getElementById("total");
+        console.log(tax);
+        // console.log(finalTotal);
+        
+        
+        if (totalElement) {
+          totalElement.textContent = `${totalSum.toFixed(2)}`;
+          // totalTax.textContent = `${tax.toFixed(2)}`;
+          // let fullTotal = parseFloat(totalElement.textContent) + parseFloat(totalTax.textContent)
+          // finalTotal.textContent `${final.toFixed(2)}`
+          totalTax.textContent = `${tax.toFixed(2)}`
+          finalTotal.textContent = `${final.toFixed(2)}`
+        }
+
+        console.log(`Updated Total Price: $${totalSum}`);
+      };
+
       quantityInput.addEventListener("input", () => {
         const newQuantity = parseInt(quantityInput.value, 10) || 1;
         totalCell.textContent = product.price * newQuantity;
+        // console.log(totalPrice);
+        updateSubtotal();
       });
-
       const removeBtn = tr.querySelector(".remove-btn");
-
       removeItem(removeBtn);
       tbody.appendChild(tr);
+      updateSubtotal();
     });
   } catch (error) {}
 };
@@ -144,4 +176,10 @@ export const getProduct = async (id) => {
 
 // document.addEventListener("DOMContentLoaded", init);
 
-
+const findTotal = (products) => {
+  // const totalPrice = products.reduce((accumulator, product) => {
+  //   return accumulator + product.price * product.qty;
+  // }, 0);
+  // console.log("find total : " + products);
+  // console.log(totalPrice);
+};

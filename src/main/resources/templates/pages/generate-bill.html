@@ -28,9 +28,12 @@
                                <input type="text" class="form-control" placeholder="Search Client"/>
                            </div>
                            <div>
-                               <button class="btn btn-primary">
-                                   <i class="fa-solid fa-circle-plus fs-5"></i> <span class="ms-2">Add New Client</span>
-                               </button>
+
+                                   <a class="btn btn-primary" th:href="@{/add-client}">
+                                        <i class="fa-solid fa-circle-plus fs-5"></i>
+                                       <span class="ms-2">Add New Client</span>
+                                   </a>
+
                            </div>
                        </div>
                        <div class="search-client-result col-md-6 offset-md-3 mt-1 p-2 .d-none">
@@ -87,34 +90,10 @@
                        </div>
                        <div class="prod-table card">
                            <table class="table mt-4">
-                               <!-- <thead>
-                                 <tr>
-                                   <th scope="col">Idx</th>
-                                   <th scope="col">Product Name</th>
-                                   <th scope="col">Price</th>
-                                   <th scope="col">Stock</th>
-                                   <th scope="col">Description</th>
-                                 </tr>
-                               </thead> -->
                                <tbody class="my-tbody" id="my-tbody"></tbody>
                            </table>
                        </div>
                    </div>
-<!--                   <div class="col-md-6 offset-md-3">-->
-<!--                       <div class="card">-->
-<!--                           <table class="table">-->
-<!--                               <thead>-->
-<!--                               <tr>-->
-<!--                                   <th scope="col">#</th>-->
-<!--                                   <th scope="col">First</th>-->
-<!--                                   <th scope="col">Last</th>-->
-<!--                                   <th scope="col">Handle</th>-->
-<!--                               </tr>-->
-<!--                               </thead>-->
-<!--                               <tbody class="my-tbody"></tbody>-->
-<!--                           </table>-->
-<!--                       </div>-->
-<!--                   </div>-->
                </div>
 
                <div>
@@ -135,8 +114,23 @@
                            </tbody>
                        </table>
                    </div>
+                       <div class="card col-md-4 offset-md-8 p-3">
+                           <div class="d-flex justify-content-between">
+                               <span class="fs-5" style="font-weight:600">Sub Total</span>
+                               <span style="font-weight:500" id="sub-total">5000</span>
+                           </div>
+                           <div class="d-flex justify-content-between">
+                               <span class="fs-5" style="font-weight:600">Tax</span>
+                               <span style="font-weight:500" id="tax">500</span>
+                           </div>
+                           <div class="d-flex justify-content-between">
+                               <span class="fs-5" style="font-weight:600">Total</span>
+                               <span style="font-weight:500" id="total">$ 6000</span>
+                           </div>
+                       </div>
                </div>
            </div>
+
 
         </div>
     </main>
@@ -149,7 +143,5 @@
 <script type="module" th:src=@{/js/client.js}></script>
 <script type="module" th:src=@{/js/bill.js}></script>
 <script type="module" th:src=@{/js/search-bill.js}></script>
-<!--<script type="module" src="/main.js"></script>-->
-<!--<script type="module" src="/search-bill.js"></script>-->
 </body>
 </html>
