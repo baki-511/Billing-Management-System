@@ -55,7 +55,7 @@ public class HomeController {
                              @RequestParam("imageFile") MultipartFile imageFile) {
         System.out.println("Product ID : "+productDto.getProductId());
         productService.updateProduct(productDto, imageFile);
-        return "redirect:/create-product";
+        return "redirect:/product/all";
     }
     
     @GetMapping("/product/delete/{productId}")
