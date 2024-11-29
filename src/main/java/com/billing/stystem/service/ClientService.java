@@ -14,4 +14,6 @@ public interface ClientService {
     public String deleteClientById(Integer clientId);
     
     public Client updateClientById(Client client);
+    
+    public Client getClientByMobile(String mob);
 }

@@ -21,11 +21,10 @@ export const renderProducts = (products) => {
       tr.innerHTML = `
       <td class="text-nowrap px-2">${product.productId}</td>
       <td class="text-nowrap px-2">${product.prodName}</td>
-      <td class="text-nowrap px-2 text-primary fs-5">$${product.price.toFixed(
+      <td class="text-nowrap px-2">$${product.price.toFixed(
         2
       )}</td>
-      <td class="text-nowrap px-2">${product.stock}</td>
-      <td class="text-nowrap px-2">${product.description}</td>
+      
 
     `;
       tBody.appendChild(tr);
@@ -84,7 +83,8 @@ const renderedSelectedList = (products) => {
             <td><input type="number" class="p-2 quantity" min="1" max="5" value="${quantity}" style="width: 70px;"></td>
              <td class="subtotal">${product.price * quantity}</td>
             <td>
-            <button class="remove-btn btn btn-outline btn-danger" ><i class="fa-solid fa-xmark" data-index="${
+            <button class="remove-btn btn btn-outline btn-danger" >
+            <i class="fa-solid fa-xmark" data-index="${
               product.productId
             }"></i></button>
             </td>

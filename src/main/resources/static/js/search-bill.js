@@ -11,7 +11,6 @@ const prodTable = document.querySelector(".prod-table");
 
 searchBar.addEventListener("input", async (e) => {
   const words = e.target.value;
-  console.log(words)
   if (words.length) {
     prodTable.style.display = "block";
     const allProducts = await fetchProducts();
@@ -31,8 +30,13 @@ searchBar.addEventListener("input", async (e) => {
 
 const addToList = (products) => {
   const allTBody = document.querySelectorAll(".my-tbody tr");
+  console.log("tBody : "+allTBody);
+  
   allTBody.forEach((r) => {
-    r.addEventListener("click", (e) => {
+    r.addEventListener("click", () => {
+      const id = r.querySelector("td");
+      console.log(id);
+      
       const firstTd = r.querySelector("td").innerHTML;
       getProduct(firstTd).then((prod) => addProduct(prod));
     });

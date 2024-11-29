@@ -2,6 +2,7 @@ package com.billing.stystem.service.impl;
 
 import com.billing.stystem.entity.Client;
 import com.billing.stystem.exception.CategoryNotFoundException;
+import com.billing.stystem.exception.ClientNotFoundException;
 import com.billing.stystem.repository.ClientRepository;
 import com.billing.stystem.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,11 @@ public class ClientServiceImpl implements ClientService {
     public Client updateClientById(Client client) {
         Client clientById = getClientById(client.getClientId());
         return clientRepository.save(client);
+    }
+    
+    @Override
+    public Client getClientByMobile(String mob) {
+        return clientRepository.findByMobile(mob)
+                .orElseThrow(ClientNotFoundException::new);
     }
 }

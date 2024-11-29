@@ -220,3 +220,7 @@ main {
   cursor: pointer;
 }
 
+.client-tbody tr{
+    cursor: pointer;
+}
+

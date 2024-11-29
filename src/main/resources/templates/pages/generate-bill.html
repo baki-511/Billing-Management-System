@@ -24,7 +24,7 @@
                <div class="card-body">
                    <div class="d-flex flex-column">
                        <div class="search-client col-md-6 offset-md-3 d-flex align-items-center justify-content-around">
-                           <div class="client-input">
+                           <div class="client-input" id="client-inp">
                                <input type="text" class="form-control" placeholder="Search Client"/>
                            </div>
                            <div>
@@ -35,35 +35,19 @@
                        </div>
                        <div class="search-client-result col-md-6 offset-md-3 mt-1 p-2 .d-none">
                            <div class="card">
-                               <table class="table">
-                                   <thead>
-<!--                                   <tr>-->
-<!--                                       <th scope="col">#</th>-->
-<!--                                       <th scope="col">First</th>-->
-<!--                                       <th scope="col">Last</th>-->
-<!--                                       <th scope="col">Handle</th>-->
-<!--                                   </tr>-->
-                                   </thead>
-                                   <tbody>
-                                   <tr>
-                                       <th scope="row">1</th>
-                                       <td>Mark</td>
-                                       <td>Otto</td>
-                                       <td>@mdo</td>
-                                   </tr>
-                                   <tr>
-                                       <th scope="row">2</th>
-                                       <td>Jacob</td>
-                                       <td>Thornton</td>
-                                       <td>@fat</td>
-                                   </tr>
-                                   <tr>
-                                       <th scope="row">3</th>
-                                       <td colspan="2">Larry the Bird</td>
-                                       <td>@twitter</td>
-                                   </tr>
-                                   </tbody>
-                               </table>
+                               <div class="client-table">
+                                   <table class="table mt-4">
+<!--                                       <thead>-->
+<!--                                         <tr>-->
+<!--                                           <th scope="col">Idx</th>-->
+<!--                                           <th scope="col">Client Name</th>-->
+<!--                                           <th scope="col">mobile</th>-->
+<!--                                           <th scope="col">Email</th>-->
+<!--                                         </tr>-->
+<!--                                       </thead>-->
+                                       <tbody class="client-tbody" id="client-tbody"></tbody>
+                                   </table>
+                               </div>
                            </div>
                        </div>
                    </div>
@@ -79,7 +63,7 @@
                                <th scope="col">Action</th>
                            </tr>
                            </thead>
-                           <tbody>
+                           <tbody class="client-select-tbody">
 
                            </tbody>
                        </table>
@@ -101,7 +85,7 @@
                        <div class="input" id="prodInp">
                            <input type="text" class="form-control mt-3" placeholder="Search" />
                        </div>
-                       <div class="prod-table">
+                       <div class="prod-table card">
                            <table class="table mt-4">
                                <!-- <thead>
                                  <tr>
@@ -162,6 +146,7 @@
 <!--Common Js-->
 <div th:replace="~{common :: common_js(~{::script})}"></div>
 
+<script type="module" th:src=@{/js/client.js}></script>
 <script type="module" th:src=@{/js/bill.js}></script>
 <script type="module" th:src=@{/js/search-bill.js}></script>
 <!--<script type="module" src="/main.js"></script>-->
