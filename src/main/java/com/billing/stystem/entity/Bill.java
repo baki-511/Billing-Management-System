@@ -1,10 +1,7 @@
 package com.billing.stystem.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,11 +11,15 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+//@ToString
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long billId;
     private LocalDateTime date;
+    private Double subTotal;
+    private Double tax;
+    private Double totalPrice;
     
     @ManyToOne
     private Client client;

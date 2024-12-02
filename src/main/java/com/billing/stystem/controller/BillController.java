@@ -13,4 +13,5 @@ public class BillController {
     public String generateBill() {
         return "/pages/generate-bill";
     }
+    
 }

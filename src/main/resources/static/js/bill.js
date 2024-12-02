@@ -109,7 +109,7 @@ const renderedSelectedList = (products) => {
         const totalElement = document.getElementById("sub-total"); // Assuming there's an element for the total
         const totalTax = document.getElementById("tax");
         const finalTotal = document.getElementById("total");
-        console.log(tax);
+        // console.log(tax);
         // console.log(finalTotal);
         
         
@@ -122,7 +122,7 @@ const renderedSelectedList = (products) => {
           finalTotal.textContent = `${final.toFixed(2)}`
         }
 
-        console.log(`Updated Total Price: $${totalSum}`);
+        // console.log(`Updated Total Price: $${totalSum}`);
       };
 
       quantityInput.addEventListener("input", () => {

@@ -5,13 +5,16 @@ const GET_PRODUCT_BY_ID = `http://localhost:8080/rest/product`;
 
 export const fetchProducts = async () => {
   const response = await fetch("http://localhost:8084/rest/client/all");
-  return response.json();
+  const data = await response.json();  // Read the JSON body once
+
+  console.log(data);  // Log the data
+  return data;  
+  // return response.json();
 };
 
 export const renderProducts = (clients) => {
   // const tBody = document.querySelector("tbody");
   const tBody = document.getElementById("client-tbody");
-  console.log(tBody);
   tBody.innerHTML = "";
   try {
     clients.forEach((client, idx) => {

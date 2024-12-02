@@ -30,4 +30,15 @@ public class Product {
     @Column(columnDefinition = "MEDIUMBLOB")
     @JsonIgnore
     private String image;
+    
+//    @Override
+//    public String toString() {
+//        return "Product{" +
+//                "productId=" + productId +
+//                ", prodName='" + prodName + '\'' +
+//                ", price=" + price +
+//                ", stock=" + stock +
+//                ", description='" + description + '\'' +
+//                '}';
+//    }
 }
