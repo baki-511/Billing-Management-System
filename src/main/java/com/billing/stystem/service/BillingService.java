@@ -14,5 +14,11 @@ public interface BillingService {
     public Bill createBill(BillDto billDto);
     
     public List<Bill> getAllBills();
+    
+    public Bill getBillById(Long billId);
+    
+    public List<Bill> getBillByClient(Client client);
+    
+    public List<BillItem> getBillItemsByBill(Bill bill);
 
 }

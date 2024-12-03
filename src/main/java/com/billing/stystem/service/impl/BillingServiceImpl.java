@@ -6,6 +6,8 @@ import com.billing.stystem.entity.Bill;
 import com.billing.stystem.entity.BillItem;
 import com.billing.stystem.entity.Client;
 import com.billing.stystem.entity.Product;
+import com.billing.stystem.exception.BillNotFoundException;
+import com.billing.stystem.repository.BillItemRepository;
 import com.billing.stystem.repository.BillRepository;
 import com.billing.stystem.service.BillingService;
 import com.billing.stystem.service.ClientService;
@@ -21,6 +23,9 @@ import java.util.List;
 public class BillingServiceImpl implements BillingService {
     @Autowired
     private BillRepository billRepository;
+    
+    @Autowired
+    private BillItemRepository billItemRepository;
     
     @Autowired
     private ClientService clientService;
@@ -71,5 +76,21 @@ public class BillingServiceImpl implements BillingService {
     @Override
     public List<Bill> getAllBills() {
         return billRepository.findAll();
+    }
+    
+    @Override
+    public Bill getBillById(Long billId) {
+        return billRepository.findById(billId)
+                .orElseThrow(() -> new BillNotFoundException(billId));
+    }
+    
+    @Override
+    public List<Bill> getBillByClient(Client client) {
+        return billRepository.findByClient(client);
+    }
+    
+    @Override
+    public List<BillItem> getBillItemsByBill(Bill bill) {
+        return billItemRepository.findByBill(bill);
     }
 }
