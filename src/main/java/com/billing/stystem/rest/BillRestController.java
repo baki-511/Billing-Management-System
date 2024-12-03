@@ -1,7 +1,6 @@
 package com.billing.stystem.rest;
 
 import com.billing.stystem.dto.BillDto;
-import com.billing.stystem.dto.BillProductDto;
 import com.billing.stystem.entity.Bill;
 import com.billing.stystem.entity.Client;
 import com.billing.stystem.service.BillingService;
@@ -22,10 +21,10 @@ public class BillRestController {
     
     @PostMapping("/save")
     public ResponseEntity<?> saveBillProducts(@RequestBody BillDto billDto) {
-        System.out.println("Bill :- " + billDto);
+//        System.out.println("Bill :- " + billDto);
         Bill bill = billingService.createBill(billDto);
-        System.out.println("---------------------------: Final Bill Print :---------------------------");
-        System.out.println(bill);
+//        System.out.println("---------------------------: Final Bill Print :---------------------------");
+//        System.out.println(bill);
         return new ResponseEntity<>("Saved Successfully", HttpStatus.OK);
     }
     
