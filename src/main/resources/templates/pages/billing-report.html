@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Construction Site</title>
+    <!--    Common Css-->
+    <div th:replace="~{common :: common(~{::link})}"></div>
+
+    <style>
+        ol, ul {
+            padding-left: 0;
+        }
+    </style>
+</head>
+<body>
+<input type="checkbox" id="sidebar-toggle">
+<!--Sidebar -->
+<div th:replace="~{components/sidebar :: sidebar}"></div>
+
+
+<!--Main Content -->
+<div class="main-content">
+    <header th:replace="~{components/header :: header}"></header>
+    <main>
+        <div class="container card pt-2">
+            <!-- Top Section -->
+            <div class="invoice border-bottom border-4 border-success">
+                <div class="head-top">
+                    <div class="row">
+                        <div
+                                class="left-top col-md-8 d-flex .justify-content-center align-items-center border-end border-success border-4"
+                        >
+                            <div class="image">
+                                <img src="/img/logo.png" alt="" />
+                            </div>
+                            <div class="d-flex flex-column">
+                                <span class="fs-3" style="font-weight: 600">ABC Company</span>
+                                <span>Adarsh Nagar, Pune, 413340</span>
+                                <span> <span>phone</span> 91348342</span>
+                                <span><span>Email : </span>abcd@gmail.com</span>
+                            </div>
+                        </div>
+                        <div class="right-top col-md-4">
+                            <h1 class="text-warning">Billing Report</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bill To  -->
+
+            <!-- products and Total   -->
+            <div class="products mt-4">
+                <table class="table table-bordered border-dark">
+                    <thead class="bg-success text-white">
+                    <tr>
+                        <th scope="col">Sr. No</th>
+                        <th scope="col">Bill ID</th>
+                        <th scope="col" class="text-center">Date</th>
+                        <th scope="col" class="text-center">Client Name</th>
+                        <th scope="col" class="text-center">Product</th>
+                        <th scope="col" class="text-center">Qty</th>
+                        <th scope="col">Subtotal</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="bill, iterStat : ${billingReport}">
+                        <td th:text="${iterStat.index + 1}"></td>
+                        <td th:text="${bill.billId}"></td>
+                        <td th:text="${bill.date.toLocalDate()}"></td>
+                        <td th:text="${bill.client.clientName}"></td>
+                        <td>
+                            <ul>
+                                <li th:each="item : ${bill.billItems}" class="mb-2 .border-bottom border-2 border-dark pb-2">
+                                    <span th:text="${item.product.prodName}"></span>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li th:each="item : ${bill.billItems}" class="text-center mb-2 .border-bottom border-2 border-dark pb-2">
+                                    <span th:text="${item.qty}"></span>
+                                </li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li th:each="item : ${bill.billItems}" class="mb-2 .border-bottom border-2 border-dark pb-2">
+                                    $<span>[[${item.qty * item.product.price}]]</span>
+                                </li>
+                            </ul>
+                        </td>
+                        <td th:text="${bill.totalPrice}"></td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+
+
+<!--Common Js-->
+<div th:replace="~{common :: common_js(~{::script})}"></div>
+
+</body>
+</html>

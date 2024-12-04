@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,6 +38,14 @@ public class BillController {
         String format = billById.getDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         model.addAttribute("date", format);
         return "/pages/client-bill";
+    }
+    
+    @GetMapping("/billing-report")
+    public String billingReport(Model model) {
+        List<Bill> allBills = billingService.getAllBills();
+        List<Bill> billingReport = new ArrayList<>();
+        model.addAttribute("billingReport", allBills);
+        return "/pages/billing-report";
     }
     
 }
