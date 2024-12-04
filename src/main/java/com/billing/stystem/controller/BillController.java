@@ -43,9 +43,15 @@ public class BillController {
     @GetMapping("/billing-report")
     public String billingReport(Model model) {
         List<Bill> allBills = billingService.getAllBills();
-        List<Bill> billingReport = new ArrayList<>();
         model.addAttribute("billingReport", allBills);
         return "/pages/billing-report";
+    }
+    
+    @GetMapping("/all-bills")
+    public String getAllBills(Model model) {
+        List<Bill> allBills = billingService.getAllBills();
+        model.addAttribute("bills", allBills);
+        return "/pages/all-bills";
     }
     
 }
