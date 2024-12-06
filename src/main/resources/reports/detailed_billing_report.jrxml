@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport
+        xmlns="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+    http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+        name="DetailedBillingReport"
+        pageWidth="595"
+        pageHeight="842"
+        columnWidth="515"
+        leftMargin="40"
+        rightMargin="40"
+        topMargin="20"
+        bottomMargin="20"
+        uuid="c2a1d5b0-4e8f-11ee-be56-0242ac120002">
+
+    <!-- Define Fields -->
+    <field name="billId" class="java.lang.Long"/>
+    <field name="date" class="java.util.Date"/>
+    <field name="clientName" class="java.lang.String"/>
+    <field name="productName" class="java.lang.String"/>
+    <field name="quantity" class="java.lang.Integer"/>
+    <field name="subtotal" class="java.lang.Double"/>
+    <field name="totalAmount" class="java.lang.Double"/>
+
+    <!-- Define Variables -->
+    <variable name="GroupSubtotal" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{subtotal}]]></variableExpression>
+        <initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+<!--        <resetType>Group</resetType>-->
+<!--        <resetGroup>BillGroup</resetGroup>-->
+    </variable>
+<!--    <variable name="TotalAmount" class="java.lang.Double" calculation="Sum">-->
+<!--        <variableExpression><![CDATA[$F{Amount}]]></variableExpression>-->
+<!--        <resetType>Group</resetType>-->
+<!--    </variable>-->
+
+    <!-- Title Section -->
+    <title>
+        <band height="50">
+            <staticText>
+                <reportElement x="0" y="10" width="515" height="30"/>
+                <textElement textAlignment="Center">
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Detailed Billing Report]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <!-- Column Header Section -->
+    <columnHeader>
+        <band height="20">
+            <!-- Bill ID Header -->
+            <staticText>
+                <reportElement x="0" y="0" width="50" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Bill ID]]></text>
+            </staticText>
+            <!-- Date Header -->
+            <staticText>
+                <reportElement x="50" y="0" width="100" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Date]]></text>
+            </staticText>
+            <!-- Client Name Header -->
+            <staticText>
+                <reportElement x="150" y="0" width="100" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Client Name]]></text>
+            </staticText>
+            <!-- Product Name Header -->
+            <staticText>
+                <reportElement x="250" y="0" width="100" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Product Name]]></text>
+            </staticText>
+            <!-- Quantity Header -->
+            <staticText>
+                <reportElement x="350" y="0" width="60" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Quantity]]></text>
+            </staticText>
+            <!-- Subtotal Header -->
+            <staticText>
+                <reportElement x="410" y="0" width="60" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Subtotal]]></text>
+            </staticText>
+            <!-- Total Header -->
+            <staticText>
+                <reportElement x="470" y="0" width="45" height="20"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <text><![CDATA[Total]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <!-- Define Group by Bill ID -->
+    <group name="BillGroup">
+        <groupExpression><![CDATA[$F{billId}]]></groupExpression>
+
+        <!-- Group Header: Bill Details -->
+        <groupHeader>
+            <band height="20">
+                <!-- Bill ID -->
+                <textField>
+                    <reportElement x="0" y="0" width="50" height="20"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{billId}]]></textFieldExpression>
+                </textField>
+                <!-- Date -->
+                <textField pattern="yyyy-MM-dd">
+                    <reportElement x="50" y="0" width="100" height="20"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+                </textField>
+                <!-- Client Name -->
+                <textField>
+                    <reportElement x="150" y="0" width="100" height="20"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$F{clientName}]]></textFieldExpression>
+                </textField>
+                <!-- Empty Cells for Product, Quantity, Subtotal, Total -->
+                <staticText>
+                    <reportElement x="250" y="0" width="100" height="20"/>
+                    <text><![CDATA[]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="350" y="0" width="60" height="20"/>
+                    <text><![CDATA[]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="410" y="0" width="60" height="20"/>
+                    <text><![CDATA[]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="470" y="0" width="45" height="20"/>
+                    <text><![CDATA[]]></text>
+                </staticText>
+            </band>
+        </groupHeader>
+
+        <!-- Group Footer: Total Amount -->
+        <groupFooter>
+            <band height="20">
+                <!-- Total Label -->
+                <staticText>
+                    <reportElement x="250" y="0" width="100" height="20"/>
+                    <textElement textAlignment="Right" verticalAlignment="Middle">
+                        <font isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Total:]]></text>
+                </staticText>
+                <!-- Total Amount -->
+                <textField pattern="$#,##0.00">
+                    <reportElement x="350" y="0" width="60" height="20"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA[$V{GroupSubtotal}]]></textFieldExpression>
+                </textField>
+                <!-- Empty Cells for Subtotal and Total -->
+                <staticText>
+                    <reportElement x="410" y="0" width="60" height="20"/>
+                    <text><![CDATA[]]></text>
+                </staticText>
+                <staticText>
+                    <reportElement x="470" y="0" width="45" height="20"/>
+                    <text><![CDATA[]]></text>
+                </staticText>
+            </band>
+        </groupFooter>
+    </group>
+
+    <!-- Detail Band: Product Details -->
+    <detail>
+        <band height="20">
+            <!-- Product Name -->
+            <textField>
+                <reportElement x="250" y="0" width="100" height="20"/>
+                <textFieldExpression><![CDATA[$F{productName}]]></textFieldExpression>
+            </textField>
+            <!-- Quantity -->
+            <textField pattern="###">
+                <reportElement x="350" y="0" width="60" height="20"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+            </textField>
+            <!-- Subtotal -->
+            <textField pattern="$#,##0.00">
+                <reportElement x="410" y="0" width="60" height="20"/>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{subtotal}]]></textFieldExpression>
+            </textField>
+            <!-- Empty Total Cell -->
+            <staticText>
+                <reportElement x="470" y="0" width="45" height="20"/>
+                <text><![CDATA[]]></text>
+            </staticText>
+        </band>
+    </detail>
+
+    <!-- No Summary Section Needed -->
+    <summary>
+        <band height="0"/>
+    </summary>
+
+</jasperReport>

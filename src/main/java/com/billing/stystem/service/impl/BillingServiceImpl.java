@@ -2,6 +2,7 @@ package com.billing.stystem.service.impl;
 
 import com.billing.stystem.dto.BillDto;
 import com.billing.stystem.dto.BillProductDto;
+import com.billing.stystem.dto.DetailedBillingReportDTO;
 import com.billing.stystem.entity.Bill;
 import com.billing.stystem.entity.BillItem;
 import com.billing.stystem.entity.Client;
@@ -92,5 +93,26 @@ public class BillingServiceImpl implements BillingService {
     @Override
     public List<BillItem> getBillItemsByBill(Bill bill) {
         return billItemRepository.findByBill(bill);
+    }
+    
+    @Override
+    public List<DetailedBillingReportDTO> getDetailedBillingReport() {
+        List<Bill> allBills = this.getAllBills();
+        List<DetailedBillingReportDTO> reportData = new ArrayList<>();
+        for (Bill b : allBills) {
+            List<BillItem> items = getBillById(b.getBillId()).getBillItems();
+            for (BillItem item : items) {
+                DetailedBillingReportDTO dto = new DetailedBillingReportDTO();
+                dto.setBillId(b.getBillId());
+                dto.setDate(b.getDate());
+                dto.setClientName(b.getClient().getClientName());
+                dto.setProductName(item.getProduct().getProdName());
+                dto.setQuantity(item.getQty());
+                dto.setSubtotal(item.getProduct().getPrice() * item.getQty());
+                dto.setTotalAmount(b.getTotalPrice());
+                reportData.add(dto);
+            }
+        }
+        return reportData;
     }
 }

@@ -54,4 +54,18 @@ public class BillController {
         return "/pages/all-bills";
     }
     
+    @GetMapping("/client/{clientId}")
+    public String getAllBillsByClient(@PathVariable Integer clientId, Model model) {
+        Client clientById = clientService.getClientById(clientId);
+        model.addAttribute("client", clientById);
+        model.addAttribute("bills", billingService.getBillByClient(clientById));
+        return "/pages/client-billing-report";
+    }
+    
+    @GetMapping("/all-clients")
+    public String getAllClients(Model model) {
+        List<Client> allClients = clientService.getAllClients();
+        model.addAttribute("clients", allClients);
+        return "/pages/all-client-reports";
+    }
 }

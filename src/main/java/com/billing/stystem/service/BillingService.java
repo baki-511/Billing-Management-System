@@ -2,6 +2,7 @@ package com.billing.stystem.service;
 
 import com.billing.stystem.dto.BillDto;
 import com.billing.stystem.dto.BillProductDto;
+import com.billing.stystem.dto.DetailedBillingReportDTO;
 import com.billing.stystem.entity.Bill;
 import com.billing.stystem.entity.BillItem;
 import com.billing.stystem.entity.Client;
@@ -20,5 +21,7 @@ public interface BillingService {
     public List<Bill> getBillByClient(Client client);
     
     public List<BillItem> getBillItemsByBill(Bill bill);
+    
+    List<DetailedBillingReportDTO> getDetailedBillingReport();
 
 }
