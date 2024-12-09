@@ -1,6 +1,8 @@
 window.onload = function () {
   document.getElementById("download").addEventListener("click", () => {
     const printDoc = this.document.getElementById("print_doc");
+    console.log("Request Getting.....");
+    
     console.log(printDoc);
     var opt = {
       margin: 0.3,
