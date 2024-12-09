@@ -1,5 +1,6 @@
 package com.billing.stystem.rest;
 
+import com.billing.stystem.dto.BillDateDto;
 import com.billing.stystem.dto.BillDto;
 import com.billing.stystem.entity.Bill;
 import com.billing.stystem.entity.Client;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/rest/bill")
@@ -31,6 +34,11 @@ public class BillRestController {
     @GetMapping("/all")
     public ResponseEntity<?> getAllBills() {
         return new ResponseEntity<>(billingService.getAllBills(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/all-bills")
+    public ResponseEntity<List<BillDateDto>> getAllBillWithDateString() {
+        return new ResponseEntity<>(billingService.getAllBillDateString(), HttpStatus.OK);
     }
     
     @GetMapping("/bill-items/{billId}")

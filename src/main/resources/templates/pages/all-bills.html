@@ -1,62 +1,158 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Bill Management</title>
     <!--    Common Css-->
     <div th:replace="~{common :: common(~{::link})}"></div>
-</head>
-<body>
-<input type="checkbox" id="sidebar-toggle">
-<!--Sidebar -->
-<div th:replace="~{components/sidebar :: sidebar}"></div>
+  </head>
+  <body>
+    <input type="checkbox" id="sidebar-toggle" />
+    <!--Sidebar -->
+    <div th:replace="~{components/sidebar :: sidebar}"></div>
 
-
-<!--Main Content -->
-<div class="main-content">
-    <header th:replace="~{components/header :: header}"></header>
-    <main>
+    <!--Main Content -->
+    <div class="main-content">
+      <header th:replace="~{components/header :: header}"></header>
+      <main>
         <div class="container">
-            <h2 class="text-center py-3 bg-light">All Products</h2>
-            <div class="card" >
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr class="py-3 fs-5 bg-success text-light">
-                            <th scope="col">ID</th>
-                            <th scope="col">Bill Id</th>
-                            <th scope="col">Bill Date</th>
-                            <th scope="col" class="text-nowrap">Client Name</th>
-                            <th scope="col">Mobile</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="bill, iterStat : ${bills}" class="py-3">
-                            <td class="text-nowrap px-2" th:text="${iterStat.index + 1}"></td>
-                            <td class="text-nowrap px-2" th:text="${bill.billId}"></td>
-                            <td class="text-nowrap px-2" th:text="${bill.date.toLocalDate()}"></td>
-                            <td class="text-nowrap px-2" th:text="${bill.client.clientName}"></td>
-                            <td class="text-nowrap px-2" th:text="${bill.client.mobile}"></td>
-                            <td class="text-nowrap px-2" th:text="${bill.client.email}"></td>
-                            <td class="text-nowrap px-2">
-                                <a th:href="@{'/bill/client-bill/'+ ${bill.billId}}" class="btn btn-warning"><i class="fa-solid fa-eye"></i></a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+          <h2 class="text-center py-3 bg-light">All Bills</h2>
+
+          <div class="card">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr class="py-3 fs-5 bg-success text-light">
+                    <th scope="col">ID</th>
+                    <th scope="col">Bill Id</th>
+                    <th scope="col">Bill Date</th>
+                    <th scope="col" class="text-nowrap">Client Name</th>
+                    <th scope="col">Mobile</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="client-bill-result">
+                  <tr th:each="bill, iterStat : ${bills}" class="py-3">
+                    <td
+                      class="text-nowrap px-2"
+                      th:text="${iterStat.index + 1}"
+                    ></td>
+                    <td class="text-nowrap px-2" th:text="${bill.billId}"></td>
+                    <td
+                      class="text-nowrap px-2"
+                      th:text="${bill.date}"
+                    ></td>
+                    <td
+                      class="text-nowrap px-2"
+                      th:text="${bill.client.clientName}"
+                    ></td>
+                    <td
+                      class="text-nowrap px-2"
+                      th:text="${bill.client.mobile}"
+                    ></td>
+                    <td
+                      class="text-nowrap px-2"
+                      th:text="${bill.client.email}"
+                    ></td>
+                    <td class="text-nowrap px-2">
+                      <a
+                        th:href="@{'/bill/client-bill/'+ ${bill.billId}}"
+                        class="btn btn-warning"
+                        ><i class="fa-solid fa-eye"></i
+                      ></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
-    </main>
-</div>
+      </main>
+    </div>
 
+    <!--Common Js-->
+    <div th:replace="~{common :: common_js(~{::script})}"></div>
 
-<!--Common Js-->
-<div th:replace="~{common :: common_js(~{::script})}"></div>
-</body>
+    <script>
+      const search = document.getElementById("search");
+
+      const fetchAllBills = async () => {
+        const response = await fetch("http://localhost:8084/rest/bill/all-bills");
+        return response.json();
+      };
+
+      search.addEventListener("input", async (e) => {
+        const words = e.target.value;
+        console.log(words);
+        
+        const bills = await fetchAllBills();
+        if (words.length) {
+          const searchTerm = words.toLowerCase();
+          const filteredBills = bills.filter(
+            (bill) =>
+              String(bill.billId).includes(searchTerm) ||
+              bill.client.clientName.includes(searchTerm) ||
+              bill.client.mobile.includes(searchTerm) ||
+              bill.client.email.includes(searchTerm) 
+          );
+          renderAllSearchBills(filteredBills);
+        } else {
+          renderAllSearchBills(bills);
+        }
+      });
+
+      const renderAllSearchBills = (bills) => {
+        const tBody = document.getElementById("client-bill-result");
+        tBody.innerHTML = "";
+
+        bills.forEach((bill, idx) => {
+          const tr = document.createElement("tr");
+          tr.classList.add("py-3");
+
+          tr.innerHTML = `<td
+                      class="text-nowrap px-2"
+                      th:text=""
+                    >${idx + 1}</td>
+                    <td class="text-nowrap px-2" th:text="">${bill.billId}</td>
+                    <td
+                      class="text-nowrap px-2"
+                      th:text=""
+                    >${bill.date}</td>
+                    <td
+                      class="text-nowrap px-2"
+                      th:text=""
+                    >${bill.client.clientName}</td>
+                    <td
+                      class="text-nowrap px-2"
+                      th:text=""
+                    >${bill.client.mobile}</td>
+                    <td
+                      class="text-nowrap px-2"
+                      th:text=""
+                    >${bill.client.email}</td>
+                    <td class="text-nowrap px-2">
+                      <a
+                        th:href="@{'/bill/client-bill/'+ ${bill.billId}}"
+                        href=
+                        class="btn btn-warning"
+                        ><i class="fa-solid fa-eye"></i
+                      ></a>
+                    </td>`;
+          tBody.appendChild(tr);
+        });
+        try {
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    </script>
+  </body>
 </html>
+
+

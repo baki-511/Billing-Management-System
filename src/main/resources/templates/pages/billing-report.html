@@ -31,7 +31,27 @@
     <main>
         <div class="container card pt-2" >
             <!-- Top Section -->
-                <div th:replace="~{components/download_pdf :: download}"></div>
+                <div class="">
+                    <div th:replace="~{components/download_pdf :: download}"></div>
+                    <div class="col-md-8 offset-md-2">
+                        <form th:action="@{/bill/get-bills}">
+                           <div class="d-flex gap-3 align-items-center">
+                               <div class="d-flex  align-items-center gap-2 mb-3">
+                                   <label class="form-label fs-5 text-secondary">Start</label>
+                                   <input type="date" name="start"  class="form-control py-3" placeholder="Check In"/>
+                               </div>
+                               <div class="d-flex  align-items-center gap-2 mb-3">
+                                   <label class="form-label fs-5 text-secondary">End</label>
+                                   <input type="date" name="end"  class="form-control py-3"
+                                          placeholder="Check Out"/>
+                               </div>
+                               <div>
+                                   <button class="btn btn-primary">Search</button>
+                               </div>
+                           </div>
+                        </form>
+                    </div>
+                </div>
 
             <div class="card p-3" id="print_doc">
                 <div class="invoice border-bottom border-4 border-success" >

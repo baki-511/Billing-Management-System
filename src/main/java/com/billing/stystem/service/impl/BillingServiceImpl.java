@@ -1,5 +1,6 @@
 package com.billing.stystem.service.impl;
 
+import com.billing.stystem.dto.BillDateDto;
 import com.billing.stystem.dto.BillDto;
 import com.billing.stystem.dto.BillProductDto;
 import com.billing.stystem.dto.DetailedBillingReportDTO;
@@ -16,7 +17,9 @@ import com.billing.stystem.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +83,28 @@ public class BillingServiceImpl implements BillingService {
     }
     
     @Override
+    public List<BillDateDto> getAllBillDateString() {
+        List<Bill> allBills = getAllBills();
+        List<BillDateDto> billDateDtoList = new ArrayList<>();
+        
+        for (Bill b : allBills) {
+            BillDateDto dto = new BillDateDto();
+            dto.setBillId(b.getBillId());
+            dto.setTax(b.getTax());
+            dto.setSubTotal(b.getSubTotal());
+            dto.setTotalPrice(b.getTotalPrice());
+            dto.setClient(b.getClient());
+            dto.setBillItems(b.getBillItems());
+            
+            LocalDateTime date = b.getDate();
+            String format = date.format(DateTimeFormatter.ofPattern("dd/MM/yyy"));
+            dto.setDate(format);
+            billDateDtoList.add(dto);
+        }
+        return billDateDtoList;
+    }
+    
+    @Override
     public Bill getBillById(Long billId) {
         return billRepository.findById(billId)
                 .orElseThrow(() -> new BillNotFoundException(billId));
@@ -114,5 +139,26 @@ public class BillingServiceImpl implements BillingService {
             }
         }
         return reportData;
+    }
+    
+    @Override
+    public List<Bill> getBillReportsFromTo(LocalDate start, LocalDate end) {
+        if (start == null) {
+            return getAllBills().stream()
+                    .filter(f -> f.getDate().toLocalDate().isBefore(end) ||
+                            f.getDate().toLocalDate().equals(end))
+                    .toList();
+        } else if (end == null) {
+            return getAllBills().stream()
+                    .filter(f -> f.getDate().toLocalDate().isAfter(start) ||
+                            f.getDate().toLocalDate().equals(start))
+                    .toList();
+        } else {
+            return getAllBills().stream()
+                    .filter(f -> (f.getDate().toLocalDate().isAfter(start) && f.getDate().toLocalDate().isBefore(end))
+                            || (f.getDate().toLocalDate().equals(start) || f.getDate().toLocalDate().equals(end)))
+                    .toList();
+        }
+        
     }
 }

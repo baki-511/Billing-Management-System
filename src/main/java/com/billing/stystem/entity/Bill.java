@@ -26,4 +26,15 @@ public class Bill {
     
     @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
     private List<BillItem> billItems;
+    
+    @Override
+    public String toString() {
+        return "Bill{" +
+                "billId=" + billId +
+                ", date=" + date.toLocalDate() +
+                ", subTotal=" + subTotal +
+                ", tax=" + tax +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }
